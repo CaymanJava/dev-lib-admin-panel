@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Lumino - Tables</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/datepicker3.css" rel="stylesheet"/>
+    <link href="css/bootstrap-table.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+
+
+    <!--Icons-->
+    <script src="js/lumino.glyphs.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span>DevLib</span>admin</a>
+            <ul class="user-menu">
+                <li class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <svg class="glyph stroked male-user">
+                            <use xlink:href="#stroked-male-user"></use>
+                        </svg>
+                        User <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">
+                            <svg class="glyph stroked male-user">
+                                <use xlink:href="#stroked-male-user"></use>
+                            </svg>
+                            Profile</a></li>
+                        <li><a href="#">
+                            <svg class="glyph stroked gear">
+                                <use xlink:href="#stroked-gear"></use>
+                            </svg>
+                            Settings</a></li>
+                        <li><a href="#">
+                            <svg class="glyph stroked cancel">
+                                <use xlink:href="#stroked-cancel"></use>
+                            </svg>
+                            Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+    <form role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search"/>
+        </div>
+    </form>
+    <ul class="nav menu">
+        <li><a href="index.html">
+            <svg class="glyph stroked dashboard-dial">
+                <use xlink:href="#stroked-dashboard-dial"></use>
+            </svg>
+            Dashboard</a></li>
+        <li><a href="widgets.html">
+            <svg class="glyph stroked calendar">
+                <use xlink:href="#stroked-calendar"></use>
+            </svg>
+            Widgets</a></li>
+        <li><a href="charts.html">
+            <svg class="glyph stroked line-graph">
+                <use xlink:href="#stroked-line-graph"></use>
+            </svg>
+            Charts</a></li>
+        <li class="active"><a href="books.html">
+            <svg class="glyph stroked table">
+                <use xlink:href="#stroked-table"></use>
+            </svg>
+            Books</a></li>
+        <li><a href="forms.html">
+            <svg class="glyph stroked pencil">
+                <use xlink:href="#stroked-pencil"></use>
+            </svg>
+            Forms</a></li>
+        <li><a href="panels.html">
+            <svg class="glyph stroked app-window">
+                <use xlink:href="#stroked-app-window"></use>
+            </svg>
+            Alerts &amp; Panels</a></li>
+        <li><a href="addBook.html">
+            <svg class="glyph stroked star">
+                <use xlink:href="#stroked-star"></use>
+            </svg>
+            Icons</a></li>
+        <li class="parent ">
+            <a href="#">
+                <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use
+                        xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
+            </a>
+            <ul class="children collapse" id="sub-item-1">
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                        Sub Item 1
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                        Sub Item 2
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right">
+                            <use xlink:href="#stroked-chevron-right"></use>
+                        </svg>
+                        Sub Item 3
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li><a href="login.html">
+            <svg class="glyph stroked male-user">
+                <use xlink:href="#stroked-male-user"></use>
+            </svg>
+            Login Page</a></li>
+    </ul>
+
+</div><!--/.sidebar-->
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                <svg class="glyph stroked home">
+                    <use xlink:href="#stroked-home"></use>
+                </svg>
+            </a></li>
+            <li class="active">Icons</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Tables</h1>
+        </div>
+    </div><!--/.row-->
+    <div class="row">
+        <a href="addBook">
+            <button class="add-btn-first btn btn-primary">Add book</button>
+        </a>
+        <button id="addAuthorButton" class="add-btn btn btn-primary">Add author</button>
+        <button id="addPublisherButton" class="add-btn btn btn-primary">Add publisher</button>
+        <button id="addCategoryButton" class="add-btn btn btn-primary">Add category</button>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div>
+                    <div class="panel-heading">Books</div>
+                </div>
+                <div class="panel-body">
+                    <table id="book-table" data-toggle="table" data-show-toggle="true" data-show-columns="true"
+                           data-search="true"
+                           data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                           data-sort-order="desc" onchange="met()">
+                        <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">Image</th>
+                            <th data-field="name" data-sortable="true">Name</th>
+                            <th data-field="lang" data-sortable="true">Lang</th>
+                            <th data-field="year" data-sortable="true">Year</th>
+                            <th data-field="author" data-sortable="true">Authors</th>
+                            <th data-field="publisher" data-sortable="true">Publisher</th>
+                            <th data-field="description" data-sortable="true">Description</th>
+                            <th data-field="category" data-sortable="true">Category</th>
+                            <th data-field="rating" data-sortable="true">Rating</th>
+                            <th data-field="views" data-sortable="true">Views</th>
+                            <th data-field="addDate" data-sortable="true">Add Date</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr align="center" th:each="book : ${bookList}">
+                            <td valign="center" align="center"><img th:src="${book.image}" th:width="60"
+                                                                    th:height="80"/></td>
+                            <td valign="center" align="center" th:text="${book.name}"></td>
+                            <td valign="center" align="center" th:text="${book.language}"></td>
+                            <td valign="center" align="center" th:text="${book.year}"></td>
+                            <td valign="center" align="center" th:text="${book.author}"></td>
+                            <td valign="center" align="center" th:text="${book.publisher}"></td>
+                            <td valign="center" align="center" class="desc-text" th:text="${book.description}"></td>
+                            <td valign="center" align="center" th:text="${book.category}"></td>
+                            <td valign="center" align="center" th:text="${book.rating}"></td>
+                            <td valign="center" align="center" th:text="${book.views}"></td>
+                            <td valign="center" align="center"
+                                th:text="${#temporals.format(book.addDate, 'dd/MMM/yyyy HH:mm')}"></td>
+                            <td valign="center" align="center">
+                                <div class="book-edit btn-edit" data-th-attr="id=${book.id}">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                            <td valign="center" align="center">
+                                <div class="book-delete btn-delete"
+                                     data-th-attr="fileId=${book.fileId}, image=${book.image}, id=${book.id}">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                            <td valign="center" align="center">
+                                <div class="book-download btn-download"
+                                     data-th-attr="fileId=${book.fileId}, name=${book.name}">
+                                    <svg class="glyph stroked upload">
+                                        <use xlink:href="#stroked-upload"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Authors</div>
+                <div class="panel-body">
+                    <table id="author-table" data-toggle="table" data-show-toggle="true" data-search="true"
+                           data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                           data-sort-order="desc">
+                        <thead>
+                        <tr>
+                            <th data-field="name">Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr align="center" th:each="author : ${authorsList}">
+                            <td valign="center" align="center" th:text="${author.name}"></td>
+                            <td valign="center" align="center">
+                                <div data-th-attr="id=${author.id}, name=${author.name}" class="btn-edit editAuthor">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                            <td valign="center" align="center">
+                                <div data-th-attr="id=${author.id}" class="btn-delete deleteAuthor">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Publishers</div>
+                <div class="panel-body">
+                    <table id="publisher-table" data-toggle="table" data-show-toggle="true" data-search="true"
+                           data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                           data-sort-order="desc" data-row-style="rowStyle">
+                        <thead>
+                        <tr>
+                            <th data-field="name">Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr align="center" th:each="publisher : ${publishersList}">
+                            <td valign="center" align="center" th:text="${publisher.name}"></td>
+                            <td valign="center" align="center">
+                                <div data-th-attr="id=${publisher.id}, name=${publisher.name}"
+                                     class="btn-edit editPublisher">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                            <td valign="center" align="center">
+                                <div data-th-attr="id=${publisher.id}" class="btn-delete deletePublisher">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"><a href="/"></a></use>
+                                    </svg>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Categories</div>
+                <div class="panel-body">
+                    <table id="category-table" data-toggle="table" data-show-toggle="true" data-search="true"
+                           data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                           data-sort-order="desc" data-row-style="rowStyle">
+                        <thead>
+                        <tr>
+                            <th data-field="name">Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr align="center" th:each="category : ${categoriesList}">
+                            <td valign="center" align="center" th:text="${category.name}"></td>
+                            <td valign="center" align="center">
+                                <div data-th-attr="id=${category.id}, name=${category.name}"
+                                     class="btn-edit editCategory">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                            <td valign="center" align="center">
+                                <div data-th-attr="id=${category.id}" class="btn-delete deleteCategory">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--/.main-->
+
+<div id="addAuthorModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Author
+            </div>
+            <div class="panel-body">
+                <form id="taskForm" action="author/add" method="post" class="col s12">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Author name</label>
+                            <input class="form-control" id="authorName" name="name" placeholder="Author name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editAuthorModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Edit Author
+            </div>
+            <div class="panel-body">
+                <form action="author/edit" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="editAuthorId" name="id"/>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Author name</label>
+                            <input class="form-control" id="editAuthorName" name="name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteAuthorModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Do you really want to delete this author?
+            </div>
+            <div class="panel-body">
+                <form action="author/delete" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="deleteAuthorId" name="id"/>
+
+                    <div class="form-group">
+                        <div class="col-md-6 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Yes</button>
+                        </div>
+                        <div class="col-md-6 widget-right">
+                            <a class="btn btn-default btn-md pull-right" id="closeAuthorModal">No</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addPublisherModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Publisher
+            </div>
+            <div class="panel-body">
+                <form action="publisher/add" method="post" class="col s12">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Publisher name</label>
+                            <input class="form-control" id="publisherName" name="name" placeholder="Publisher"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editPublisherModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Edit Publisher
+            </div>
+            <div class="panel-body">
+                <form action="publisher/edit" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="editPublisherId" name="id"/>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Publisher name</label>
+                            <input class="form-control" id="editPublisherName" name="name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deletePublisherModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Do you really want to delete this publisher?
+            </div>
+            <div class="panel-body">
+                <form action="publisher/delete" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="deletePublisherId" name="id"/>
+
+                    <div class="form-group">
+                        <div class="col-md-6 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Yes</button>
+                        </div>
+                        <div class="col-md-6 widget-right">
+                            <a class="btn btn-default btn-md pull-right" id="closePublisherModal">No</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addCategoryModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Category
+            </div>
+            <div class="panel-body">
+                <form action="category/add" method="post" class="col s12">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Category name</label>
+                            <input class="form-control" id="categoryName" name="name" placeholder="Category name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editCategoryModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Edit Category
+            </div>
+            <div class="panel-body">
+                <form action="category/edit" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="editCategoryId" name="id"/>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Category name</label>
+                            <input class="form-control" id="editCategoryName" name="name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteCategoryModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Do you really want to delete this category?
+            </div>
+            <div class="panel-body">
+                <form action="category/delete" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="deleteCategoryId" name="id"/>
+
+                    <div class="form-group">
+                        <div class="col-md-6 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Yes</button>
+                        </div>
+                        <div class="col-md-6 widget-right">
+                            <a class="btn btn-default btn-md pull-right" id="closeCategoryModal">No</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-table.js"></script>
+<script src="js/table-scripts.js"></script>
+<script src="js/materialize.min.js"></script>
+<script type="text/javascript">
+    $('#addAuthorButton').click(function () {
+        $('#addAuthorModal').openModal('addAuthorModal');
+    });
+
+    $('#addPublisherButton').click(function () {
+        $('#addPublisherModal').openModal('addPublisherModal');
+    });
+
+    $('#addCategoryButton').click(function () {
+        $('#addCategoryModal').openModal('addCategoryModal');
+    });
+
+    $('#closeAuthorModal').click(function () {
+        $('#deleteAuthorModal').closeModal('deleteAuthorModal');
+    });
+
+    $('#closePublisherModal').click(function () {
+        $('#deletePublisherModal').closeModal('deletePublisherModal');
+    });
+
+    $('#closeCategoryModal').click(function () {
+        $('#deleteCategoryModal').closeModal('deleteCategoryModal');
+    });
+</script>
+
+<script th:inline="javascript">
+    $("#author-table").bind("DOMSubtreeModified", function () {
+        $('.editAuthor').click(function () {
+            $('#editAuthorModal #editAuthorId').val([[$(this).attr('id')]]);
+            $('#editAuthorModal #editAuthorName').val([[$(this).attr('name')]]);
+            $('#editAuthorModal').openModal('editAuthorModal');
+        });
+
+
+        $('.deleteAuthor').click(function () {
+            $('#deleteAuthorModal #deleteAuthorId').val([[$(this).attr('id')]]);
+            $('#deleteAuthorModal').openModal('deleteAuthorModal');
+        });
+
+    });
+
+
+    $("#publisher-table").bind("DOMSubtreeModified", function () {
+
+        $('.editPublisher').click(function () {
+            $('#editPublisherModal #editPublisherId').val([[$(this).attr('id')]]);
+            $('#editPublisherModal #editPublisherName').val([[$(this).attr('name')]]);
+            $('#editPublisherModal').openModal('editPublisherModal');
+        });
+
+
+        $('.deletePublisher').click(function () {
+            $('#deletePublisherModal #deletePublisherId').val([[$(this).attr('id')]]);
+            $('#deletePublisherModal').openModal('deletePublisherModal');
+        });
+
+    });
+
+
+    $("#category-table").bind("DOMSubtreeModified", function () {
+        $('.editCategory').click(function () {
+            $('#editCategoryModal #editCategoryId').val([[$(this).attr('id')]]);
+            $('#editCategoryModal #editCategoryName').val([[$(this).attr('name')]]);
+            $('#editCategoryModal').openModal('editCategoryModal');
+        });
+
+        $('.deleteCategory').click(function () {
+            $('#deleteCategoryModal #deleteCategoryId').val([[$(this).attr('id')]]);
+            $('#deleteCategoryModal').openModal('deleteCategoryModal');
+        });
+    });
+
+
+    $("#book-table").bind("DOMSubtreeModified", function () {
+        $('.book-edit').click(function () {
+            var id = [[$(this).attr('id')]].toString()
+            var url = 'editBook?'
+            var params = {id: id};
+            var str = jQuery.param(params);
+            location = url + str
+        });
+
+
+        $('.book-download').click(function () {
+            /*<![CDATA[*/
+            var startUrl = [[${@environment.getProperty('file.service.url')}]];
+            /*]]>*/
+
+            var id = [[$(this).attr('fileId')]].toString()
+            var name = [[$(this).attr('name')]]
+            name = name.toString().replace(/ /g, "_");
+            var url = startUrl + '/pdf/download?'
+            var params = {id: id, name: name};
+            var str = jQuery.param(params);
+            location = url + str
+        });
+
+        $('.book-delete').click(function () {
+            var id = [[$(this).attr('id')]].toString()
+            var fileId = [[$(this).attr('fileId')]].toString()
+            var image = [[$(this).attr('image')]].toString()
+            var url = '/books/delete?'
+            var params = {id: id, fileId: fileId, image: image};
+            var str = jQuery.param(params);
+            location = url + str
+        });
+    });
+</script>
+
+</body>
+</html>
