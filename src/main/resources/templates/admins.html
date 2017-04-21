@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Admins</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/datepicker3.css" rel="stylesheet"/>
+    <link href="css/bootstrap-table.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+</head>
+
+<body>
+<th:block th:include="fragments :: header">
+</th:block>
+<th:block th:include="fragments :: left_panel">
+</th:block>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                <svg class="glyph stroked home">
+                    <use xlink:href="#stroked-home"></use>
+                </svg>
+            </a></li>
+            <li class="active">Admins</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Admins</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <button id="addAdminButton" class="add-btn-first btn btn-primary">Add admin</button>
+        <button id="addGuestButton" class="add-btn btn btn-primary">Add guest</button>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div>
+                    <div class="panel-heading">Admins</div>
+                </div>
+                <div class="panel-body">
+                    <table id="admin-table"
+                        data-toggle="table" data-show-toggle="true" data-show-columns="true"
+                           data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                           data-sort-order="desc">
+                        <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">Id</th>
+                            <th data-field="login" data-sortable="true">Login</th>
+                            <th data-field="registered" data-sortable="true">Registered</th>
+                            <th data-field="enabled" data-sortable="true">Enabled</th>
+                            <th data-field="role" data-sortable="true">Role</th>
+                            <th data-field="edit">Edit</th>
+                            <th data-field="delete">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <tr align="center" th:each="admin : ${adminList}">
+                            <td valign="center" align="center" th:text="${admin.id}"></td>
+                            <td valign="center" align="center" th:text="${admin.login}"></td>
+                            <td valign="center" align="center"
+                                th:text="${#temporals.format(admin.registered, 'dd/MMM/yyyy HH:mm')}"></td>
+                            <td th:if="${admin.enabled == true}">
+                                <div class="admin-status btn-edit" data-th-attr="id=${admin.id}">
+                                    <a style="color:green" th:href="@{admins/status(id=${admin.id})}">
+                                        <svg class="glyph stroked checkmark">
+                                            <use xlink:href="#stroked-checkmark"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                            <td th:if="${admin.enabled == false}">
+                                <div class="btn-edit" data-th-attr="id=${admin.id}">
+                                    <a style="color:red" th:href="@{admins/status(id=${admin.id})}">
+                                        <svg class="glyph stroked cancel">
+                                            <use xlink:href="#stroked-cancel"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                            <td th:if="${admin.role.name() == 'ROLE_ADMIN'}">
+                                <a style="color:green" th:href="@{admins/role(id=${admin.id})}">ADMIN</a>
+                            </td>
+                            <td th:if="${admin.role.name() == 'ROLE_GUEST'}">
+                                <a style="color:#1e90ff" th:href="@{admins/role(id=${admin.id})}">GUEST</a>
+                            </td>
+                            <td valign="center" align="center">
+                                <div class="admin-edit btn-edit" data-th-attr="id=${admin.id}, login=${admin.login}, password=${admin.password}">
+                                    <svg style="color:darkblue" class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </div>
+                            </td>
+                            <td valign="center" align="center">
+                                <div class="btn-delete">
+                                    <a style="color:red" th:href="@{admins/delete(id=${admin.id})}">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div><!--/.main-->
+
+<div id="addAdminModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Admin
+            </div>
+            <div class="panel-body">
+                <form action="admins/add" method="post" class="col s12">
+                    <input class="form-control" name="admin" type="hidden" value="true"/>
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Login</label>
+                            <input class="form-control" name="login" placeholder="Login"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Password</label>
+                            <input class="form-control" name="password" placeholder="Password"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addGuestModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Add Guest
+            </div>
+            <div class="panel-body">
+                <form action="admins/add" method="post" class="col s12">
+                    <input class="form-control" name="admin" type="hidden" value="false"/>
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Login</label>
+                            <input class="form-control" name="login" placeholder="Login"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Password</label>
+                            <input class="form-control" name="password" placeholder="Password"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editAdminModal" class="modal">
+    <div class="modal-content modal-entity">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Edit Admin
+            </div>
+            <div class="panel-body">
+                <form action="admins/edit" method="post" class="col s12">
+                    <input type="hidden" class="form-control" id="editAdminId" name="editAdminId"/>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Login</label>
+                            <input class="form-control" id="editAdminLogin" name="editAdminLogin"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label>Password</label>
+                            <input class="form-control" type="password" id="editAdminPassword" name="editAdminPassword"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 widget-left">
+                            <button type="submit" class="btn btn-default btn-md pull-left">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/lumino.glyphs.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-table.js"></script>
+<script src="js/table-scripts.js"></script>
+<script src="js/materialize.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+<script th:inline="javascript">
+    $(function () {
+        $('#admin_button').attr('class', 'active')
+    });
+
+    $('#addAdminButton').click(function () {
+        $('#addAdminModal').openModal('addAdminModal');
+    });
+
+    $('#addGuestButton').click(function () {
+        $('#addGuestModal').openModal('addGuestModal');
+    });
+
+    $("#admin-table").bind("DOMSubtreeModified", function () {
+
+        $('.admin-edit').click(function () {
+            $('#editAdminModal #editAdminId').val([[$(this).attr('id')]]);
+            $('#editAdminModal #editAdminLogin').val([[$(this).attr('login')]]);
+            $('#editAdminModal #editAdminPassword').val([[$(this).attr('password')]]);
+            $('#editAdminModal').openModal('editAdminModal');
+        });
+    });
+
+</script>
+
+</body>
+</html>

@@ -6,6 +6,7 @@ import org.cayman.dto.SaveBookRequest;
 import org.cayman.exception.SaveEntityException;
 import org.cayman.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,23 +25,27 @@ public class BookController {
     }
 
     @RequestMapping(value = "books/add", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addBook(@RequestParam("name") String name,
                           @RequestParam("lang") String lang,
                           @RequestParam("year") int year,
                           @RequestParam("authors") String authors,
-                          @RequestParam("publisher") String publiser,
+                          @RequestParam("publisher") String publisher,
                           @RequestParam("description")String description,
                           @RequestParam("file") MultipartFile file,
                           @RequestParam("page") int page,
-                          @RequestParam("category") int category
+                          @RequestParam("category") int category,
+                          RedirectAttributes redirectAttributes
                           ) {
-        Book book = bookService.saveBook(name, lang, year, authors, publiser, description, file, page, category);
-        if (book == null || book.getId() == 0) throw new SaveEntityException("Author hadn't been updated");
-        return "redirect:/books";
+        Book book = bookService.saveBook(name, lang, year, authors, publisher, description, file, page, category);
+        if (book == null || book.getId() == 0) throw new SaveEntityException("Book hadn't been saved");
+        redirectAttributes.addAttribute("id", book.getId());
+        return "redirect:/editBook";
     }
 
     @RequestMapping(value = "/books/delete", method = RequestMethod.GET)
-    public String downloadBook(@RequestParam("fileId") String fileId,
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String deleteBook(@RequestParam("fileId") String fileId,
                                @RequestParam("id") int id,
                                @RequestParam("image") String image) {
         if (!bookService.deleteBook(fileId, id, image)) log.warn("Something went wrong. Please, check if book has been deleted");
@@ -48,6 +53,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/books/replace/image", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String replaceImage(@RequestParam("file") MultipartFile file,
                                @RequestParam("bookId") int id,
                                @RequestParam("oldLink") String oldLink,
@@ -58,6 +64,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/books/edit", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String updateBook(@RequestParam("id") int id,
                              @RequestParam("name") String name,
                              @RequestParam("lang") String lang,

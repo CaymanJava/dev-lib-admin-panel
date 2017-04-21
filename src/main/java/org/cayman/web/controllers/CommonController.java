@@ -8,6 +8,7 @@ import org.cayman.service.AuthorService;
 import org.cayman.service.BookService;
 import org.cayman.service.CategoryService;
 import org.cayman.service.PublisherService;
+import org.cayman.utils.LoggedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,7 @@ public class CommonController {
 
     @RequestMapping(value = "books", method = RequestMethod.GET)
     public String tables(Model model) {
+        model.addAttribute("adminName", LoggedUser.getName());
         model.addAttribute("bookList", bookService.getAllBooksDto());
         model.addAttribute("authorsList", authorService.getAllAuthors());
         model.addAttribute("publishersList", publisherService.getAllPublishers());
@@ -51,6 +53,7 @@ public class CommonController {
         List<String> authorsNames = authorService.getAllAuthors().stream().map(Author::getName).collect(Collectors.toList());
         List<String> publishersNames = publisherService.getAllPublishers().stream().map(Publisher::getName).collect(Collectors.toList());
 
+        model.addAttribute("adminName", LoggedUser.getName());
         model.addAttribute("authorsName", authorsNames);
         model.addAttribute("publishersNames", publishersNames);
         model.addAttribute("categoriesList", categoryService.getAllCategories());
@@ -63,6 +66,7 @@ public class CommonController {
         List<String> publishersNames = publisherService.getAllPublishers().stream().map(Publisher::getName).collect(Collectors.toList());
         BookDto editBook = bookService.getBookDtoById(id);
 
+        model.addAttribute("adminName", LoggedUser.getName());
         model.addAttribute("authorsName", authorsNames);
         model.addAttribute("publishersNames", publishersNames);
         model.addAttribute("categoriesList", categoryService.getAllCategories());

@@ -4,6 +4,7 @@ target/
 work
 logs/*
 .idea
+.iml
 log/*
 debug
 gc.log

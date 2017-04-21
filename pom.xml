@@ -6,7 +6,7 @@
 
     <groupId>dev-lib</groupId>
     <artifactId>dev-lib-admin-panel</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <name>admin-panel</name>
     <description>file-service</description>
@@ -23,7 +23,7 @@
 
         <!--SPRING-->
         <spring.version>4.2.6.RELEASE</spring.version>
-        <!--<spring-secutiry-taglib.version>4.0.3.RELEASE</spring-secutiry-taglib.version>-->
+        <spring-secutiry-taglib.version>4.0.3.RELEASE</spring-secutiry-taglib.version>
 
         <!--WEB-->
         <thymeleaf-extras-java8time.version>2.1.0.RELEASE</thymeleaf-extras-java8time.version>
@@ -40,6 +40,14 @@
 
         <!--JSON-->
         <jackson.version>2.8.6</jackson.version>
+
+        <!--ORM-->
+        <hibernate.version>5.0.6.Final</hibernate.version>
+        <javax.transactions.version>1.1</javax.transactions.version>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
+
+        <!--DB-->
+        <postgres.version>9.4-1206-jdbc42</postgres.version>
 
         <!--TEST-->
         <junit.version>4.11</junit.version>
@@ -75,8 +83,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-
-        <!--DON'T FORGET DELETE-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -86,8 +92,10 @@
             <artifactId>thymeleaf-extras-java8time</artifactId>
             <version>2.1.0.RELEASE</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -105,7 +113,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
@@ -113,7 +121,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring-secutiry-taglib.version}</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -169,6 +177,47 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <!--ORM-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>${javax.transactions.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+
+        <!--DB-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgres.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--TEST-->

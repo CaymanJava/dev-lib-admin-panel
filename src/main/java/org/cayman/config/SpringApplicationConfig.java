@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -20,7 +21,8 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 @SpringBootApplication
 @Configuration
 @EnableScheduling
-@ComponentScan(value={"org.cayman.web.**", "org.cayman.service.**", "org.cayman.utils.**"})
+@Import({AdminDataSourceConfig.class, UserDataSourceConfig.class, SecurityConfig.class})
+@ComponentScan(value={"org.cayman.web.**", "org.cayman.service.**", "org.cayman.utils.**", "org.cayman.repository.**"})
 @Slf4j
 public class SpringApplicationConfig {
 

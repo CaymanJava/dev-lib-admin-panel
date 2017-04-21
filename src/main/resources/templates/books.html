@@ -11,144 +11,13 @@
     <link href="css/styles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <link rel="stylesheet" href="/resources/demos/style.css"/>
-
-
-    <!--Icons-->
-    <script src="js/lumino.glyphs.js"></script>
-
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><span>DevLib</span>admin</a>
-            <ul class="user-menu">
-                <li class="dropdown pull-right">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <svg class="glyph stroked male-user">
-                            <use xlink:href="#stroked-male-user"></use>
-                        </svg>
-                        User <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">
-                            <svg class="glyph stroked male-user">
-                                <use xlink:href="#stroked-male-user"></use>
-                            </svg>
-                            Profile</a></li>
-                        <li><a href="#">
-                            <svg class="glyph stroked gear">
-                                <use xlink:href="#stroked-gear"></use>
-                            </svg>
-                            Settings</a></li>
-                        <li><a href="#">
-                            <svg class="glyph stroked cancel">
-                                <use xlink:href="#stroked-cancel"></use>
-                            </svg>
-                            Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-    </div><!-- /.container-fluid -->
-</nav>
-
-<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-    <form role="search">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search"/>
-        </div>
-    </form>
-    <ul class="nav menu">
-        <li><a href="index.html">
-            <svg class="glyph stroked dashboard-dial">
-                <use xlink:href="#stroked-dashboard-dial"></use>
-            </svg>
-            Dashboard</a></li>
-        <li><a href="widgets.html">
-            <svg class="glyph stroked calendar">
-                <use xlink:href="#stroked-calendar"></use>
-            </svg>
-            Widgets</a></li>
-        <li><a href="charts.html">
-            <svg class="glyph stroked line-graph">
-                <use xlink:href="#stroked-line-graph"></use>
-            </svg>
-            Charts</a></li>
-        <li class="active"><a href="books.html">
-            <svg class="glyph stroked table">
-                <use xlink:href="#stroked-table"></use>
-            </svg>
-            Books</a></li>
-        <li><a href="forms.html">
-            <svg class="glyph stroked pencil">
-                <use xlink:href="#stroked-pencil"></use>
-            </svg>
-            Forms</a></li>
-        <li><a href="panels.html">
-            <svg class="glyph stroked app-window">
-                <use xlink:href="#stroked-app-window"></use>
-            </svg>
-            Alerts &amp; Panels</a></li>
-        <li><a href="addBook.html">
-            <svg class="glyph stroked star">
-                <use xlink:href="#stroked-star"></use>
-            </svg>
-            Icons</a></li>
-        <li class="parent ">
-            <a href="#">
-                <span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use
-                        xlink:href="#stroked-chevron-down"></use></svg></span> Dropdown
-            </a>
-            <ul class="children collapse" id="sub-item-1">
-                <li>
-                    <a class="" href="#">
-                        <svg class="glyph stroked chevron-right">
-                            <use xlink:href="#stroked-chevron-right"></use>
-                        </svg>
-                        Sub Item 1
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <svg class="glyph stroked chevron-right">
-                            <use xlink:href="#stroked-chevron-right"></use>
-                        </svg>
-                        Sub Item 2
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="#">
-                        <svg class="glyph stroked chevron-right">
-                            <use xlink:href="#stroked-chevron-right"></use>
-                        </svg>
-                        Sub Item 3
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li role="presentation" class="divider"></li>
-        <li><a href="login.html">
-            <svg class="glyph stroked male-user">
-                <use xlink:href="#stroked-male-user"></use>
-            </svg>
-            Login Page</a></li>
-    </ul>
-
-</div><!--/.sidebar-->
+<th:block th:include="fragments :: header">
+</th:block>
+<th:block th:include="fragments :: left_panel">
+</th:block>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -158,13 +27,13 @@
                     <use xlink:href="#stroked-home"></use>
                 </svg>
             </a></li>
-            <li class="active">Icons</li>
+            <li class="active">Books</li>
         </ol>
     </div><!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Tables</h1>
+            <h1 class="page-header">Books</h1>
         </div>
     </div><!--/.row-->
     <div class="row">
@@ -222,23 +91,25 @@
                                 th:text="${#temporals.format(book.addDate, 'dd/MMM/yyyy HH:mm')}"></td>
                             <td valign="center" align="center">
                                 <div class="book-edit btn-edit" data-th-attr="id=${book.id}">
-                                    <svg class="glyph stroked pencil">
+                                    <svg style="color:darkblue" class="glyph stroked pencil">
                                         <use xlink:href="#stroked-pencil"></use>
                                     </svg>
                                 </div>
                             </td>
                             <td valign="center" align="center">
-                                <div class="book-delete btn-delete"
-                                     data-th-attr="fileId=${book.fileId}, image=${book.image}, id=${book.id}">
-                                    <svg class="glyph stroked trash">
-                                        <use xlink:href="#stroked-trash"></use>
-                                    </svg>
+                                <div class="btn-delete">
+                                    <a style="color:red"
+                                       th:href="@{books/delete(fileId=${book.fileId}, image=${book.image}, id=${book.id})}">
+                                        <svg class="glyph stroked trash">
+                                            <use xlink:href="#stroked-trash"></use>
+                                        </svg>
+                                    </a>
                                 </div>
                             </td>
                             <td valign="center" align="center">
                                 <div class="book-download btn-download"
                                      data-th-attr="fileId=${book.fileId}, name=${book.name}">
-                                    <svg class="glyph stroked upload">
+                                    <svg style="color:darkgreen" class="glyph stroked upload">
                                         <use xlink:href="#stroked-upload"></use>
                                     </svg>
                                 </div>
@@ -270,14 +141,14 @@
                             <td valign="center" align="center" th:text="${author.name}"></td>
                             <td valign="center" align="center">
                                 <div data-th-attr="id=${author.id}, name=${author.name}" class="btn-edit editAuthor">
-                                    <svg class="glyph stroked pencil">
+                                    <svg style="color:darkblue" class="glyph stroked pencil">
                                         <use xlink:href="#stroked-pencil"></use>
                                     </svg>
                                 </div>
                             </td>
                             <td valign="center" align="center">
                                 <div data-th-attr="id=${author.id}" class="btn-delete deleteAuthor">
-                                    <svg class="glyph stroked trash">
+                                    <svg style="color:red" class="glyph stroked trash">
                                         <use xlink:href="#stroked-trash"></use>
                                     </svg>
                                 </div>
@@ -308,14 +179,14 @@
                             <td valign="center" align="center">
                                 <div data-th-attr="id=${publisher.id}, name=${publisher.name}"
                                      class="btn-edit editPublisher">
-                                    <svg class="glyph stroked pencil">
+                                    <svg style="color:darkblue" class="glyph stroked pencil">
                                         <use xlink:href="#stroked-pencil"></use>
                                     </svg>
                                 </div>
                             </td>
                             <td valign="center" align="center">
                                 <div data-th-attr="id=${publisher.id}" class="btn-delete deletePublisher">
-                                    <svg class="glyph stroked trash">
+                                    <svg style="color:red" class="glyph stroked trash">
                                         <use xlink:href="#stroked-trash"><a href="/"></a></use>
                                     </svg>
                                 </div>
@@ -346,14 +217,14 @@
                             <td valign="center" align="center">
                                 <div data-th-attr="id=${category.id}, name=${category.name}"
                                      class="btn-edit editCategory">
-                                    <svg class="glyph stroked pencil">
+                                    <svg style="color:darkblue" class="glyph stroked pencil">
                                         <use xlink:href="#stroked-pencil"></use>
                                     </svg>
                                 </div>
                             </td>
                             <td valign="center" align="center">
                                 <div data-th-attr="id=${category.id}" class="btn-delete deleteCategory">
-                                    <svg class="glyph stroked trash">
+                                    <svg style="color:red" class="glyph stroked trash">
                                         <use xlink:href="#stroked-trash"></use>
                                     </svg>
                                 </div>
@@ -600,7 +471,7 @@
         </div>
     </div>
 </div>
-
+<script src="js/lumino.glyphs.js"></script>
 <script src="js/jquery-2.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/chart.min.js"></script>
@@ -638,6 +509,10 @@
 </script>
 
 <script th:inline="javascript">
+    $(function () {
+        $('#book_button').attr('class', 'active')
+    });
+
     $("#author-table").bind("DOMSubtreeModified", function () {
         $('.editAuthor').click(function () {
             $('#editAuthorModal #editAuthorId').val([[$(this).attr('id')]]);
@@ -705,16 +580,6 @@
             name = name.toString().replace(/ /g, "_");
             var url = startUrl + '/pdf/download?'
             var params = {id: id, name: name};
-            var str = jQuery.param(params);
-            location = url + str
-        });
-
-        $('.book-delete').click(function () {
-            var id = [[$(this).attr('id')]].toString()
-            var fileId = [[$(this).attr('fileId')]].toString()
-            var image = [[$(this).attr('image')]].toString()
-            var url = '/books/delete?'
-            var params = {id: id, fileId: fileId, image: image};
             var str = jQuery.param(params);
             location = url + str
         });
