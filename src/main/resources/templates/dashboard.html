@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>DevLib - Dashboard</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/datepicker3.css" rel="stylesheet"/>
+    <link href="css/bootstrap-table.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+</head>
+
+<body>
+<th:block th:include="fragments :: header">
+</th:block>
+<th:block th:include="fragments :: left_panel">
+</th:block>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                <svg class="glyph stroked home">
+                    <use xlink:href="#stroked-home"></use>
+                </svg>
+            </a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-lg-3">
+            <div class="panel panel-blue panel-widget ">
+                <div class="row no-padding">
+                    <div class="col-sm-3 col-lg-5 widget-left">
+                        <svg class="glyph stroked bag">
+                            <use xlink:href="#stroked-bag"></use>
+                        </svg>
+                    </div>
+                    <div class="col-sm-9 col-lg-7 widget-right">
+                        <div class="large" th:text="${bookCount}"></div>
+                        <div class="text-muted">Books</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+            <div class="panel panel-orange panel-widget">
+                <div class="row no-padding">
+                    <div class="col-sm-3 col-lg-5 widget-left">
+                        <svg class="glyph stroked empty-message">
+                            <use xlink:href="#stroked-empty-message"></use>
+                        </svg>
+                    </div>
+                    <div class="col-sm-9 col-lg-7 widget-right">
+                        <div class="large" th:text="${newMessageCount}"></div>
+                        <div class="text-muted">New messages</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+            <div class="panel panel-teal panel-widget">
+                <div class="row no-padding">
+                    <div class="col-sm-3 col-lg-5 widget-left">
+                        <svg class="glyph stroked male-user">
+                            <use xlink:href="#stroked-male-user"></use>
+                        </svg>
+                    </div>
+                    <div class="col-sm-9 col-lg-7 widget-right">
+                        <div class="large" th:text="${userCount}"></div>
+                        <div class="text-muted">Users</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-3">
+            <div class="panel panel-red panel-widget">
+                <div class="row no-padding">
+                    <div class="col-sm-3 col-lg-5 widget-left">
+                        <svg class="glyph stroked app-window-with-content">
+                            <use xlink:href="#stroked-app-window-with-content"></use>
+                        </svg>
+                    </div>
+                    <div class="col-sm-9 col-lg-7 widget-right">
+                        <div class="large">25.2k</div>
+                        <div class="text-muted">Page Views</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <svg class="glyph stroked email">
+                        <use xlink:href="#stroked-email"></use>
+                    </svg>
+                    Contact Form
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" action="" method="post">
+                        <fieldset>
+                            <!-- Name input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="name">Name</label>
+                                <div class="col-md-9">
+                                    <input id="name" name="name" type="text" placeholder="Your name"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+
+                            <!-- Email input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="email">Your E-mail</label>
+                                <div class="col-md-9">
+                                    <input id="email" name="email" type="text" placeholder="Your email"
+                                           class="form-control"/>
+                                </div>
+                            </div>
+
+                            <!-- Message body -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="message">Your message</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="message" name="message"
+                                              placeholder="Please enter your message here..." rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Form actions -->
+                            <div class="form-group">
+                                <div class="col-md-12 widget-right">
+                                    <button type="submit" class="btn btn-default btn-md pull-right">Submit</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default chat">
+                <div class="panel-heading" id="accordion">
+                    <svg class="glyph stroked two-messages">
+                        <use xlink:href="#stroked-two-messages"></use>
+                    </svg>
+                    Messages
+                </div>
+
+                <div class="panel-body">
+                    <ul th:each="message : ${messageList}">
+                        <li class="left clearfix">
+                            <div th:class="${message.newOne} ? 'newMessage' : 'oldMessage'">
+                                <input type="hidden" class="form-control" id="messageId" name="id"
+                                       th:value="${message.id}"/>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <div class="row">
+                                            <b>User ID:</b>
+                                            <small class="text-muted" th:text="${message.userId}"></small>
+                                        </div>
+                                        <div class="row">
+                                            <b>Email:</b>
+                                            <small class="text-muted" th:text="${message.email}"></small>
+                                        </div>
+                                        <div class="row">
+                                            <b>Date:</b>
+                                            <small class="text-muted"
+                                                   th:text="${#temporals.format(message.sendDateTime, 'dd/MMM/yyyy HH:mm')}"></small>
+                                        </div>
+                                        <div class="row">
+                                            <b>IP:</b>
+                                            <small class="text-muted" th:text="${message.ip}"></small>
+                                        </div>
+                                    </div>
+                                    <p th:text="${message.message}">
+                                    </p>
+                                    <p align="right">
+                                        <button class="btn btn-md" id="btn-chat">Mark</button>
+                                        <button class="btn btn-md" id="btn-chat">Delete</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-md"
+                               placeholder="Type your message here..."/>
+                        <span class="input-group-btn">
+								<button class="btn btn-success btn-md" id="btn-chat">Send</button>
+							</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--/.col-->
+
+        <div class="col-md-4">
+
+            <div class="panel panel-red">
+                <div class="panel-heading dark-overlay">
+                    <svg class="glyph stroked calendar">
+                        <use xlink:href="#stroked-calendar"></use>
+                    </svg>
+                    Calendar
+                </div>
+                <div class="panel-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+
+            <div class="panel panel-blue">
+                <div class="panel-heading dark-overlay">
+                    <svg class="glyph stroked clipboard-with-paper">
+                        <use xlink:href="#stroked-clipboard-with-paper"></use>
+                    </svg>
+                    To-do List
+                </div>
+                <div class="panel-body">
+                    <ul class="todo-list">
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox"/>
+                                <label for="checkbox">Make a plan for today</label>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <a href="#">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="flag">
+                                    <svg class="glyph stroked flag">
+                                        <use xlink:href="#stroked-flag"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="trash">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox"/>
+                                <label for="checkbox">Update Basecamp</label>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <a href="#">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="flag">
+                                    <svg class="glyph stroked flag">
+                                        <use xlink:href="#stroked-flag"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="trash">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox"/>
+                                <label for="checkbox">Send email to Jane</label>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <a href="#">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="flag">
+                                    <svg class="glyph stroked flag">
+                                        <use xlink:href="#stroked-flag"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="trash">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox"/>
+                                <label for="checkbox">Drink coffee</label>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <a href="#">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="flag">
+                                    <svg class="glyph stroked flag">
+                                        <use xlink:href="#stroked-flag"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="trash">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox"/>
+                                <label for="checkbox">Do some work</label>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <a href="#">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="flag">
+                                    <svg class="glyph stroked flag">
+                                        <use xlink:href="#stroked-flag"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="trash">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="todo-list-item">
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkbox"/>
+                                <label for="checkbox">Tidy up workspace</label>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <a href="#">
+                                    <svg class="glyph stroked pencil">
+                                        <use xlink:href="#stroked-pencil"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="flag">
+                                    <svg class="glyph stroked flag">
+                                        <use xlink:href="#stroked-flag"></use>
+                                    </svg>
+                                </a>
+                                <a href="#" class="trash">
+                                    <svg class="glyph stroked trash">
+                                        <use xlink:href="#stroked-trash"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-md" placeholder="Add new task"/>
+                        <span class="input-group-btn">
+								<button class="btn btn-primary btn-md" id="btn-todo">Add</button>
+							</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--/.col-->
+    </div><!--/.row-->
+
+</div>
+<script src="js/lumino.glyphs.js"></script>
+<script src="js/jquery-2.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/chart.min.js"></script>
+<script src="js/chart-data.js"></script>
+<script src="js/easypiechart.js"></script>
+<script src="js/easypiechart-data.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-table.js"></script>
+<script src="js/table-scripts.js"></script>
+<script src="js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+</script>
+
+<script th:inline="javascript">
+    $(function () {
+        $('#dashboard_button').attr('class', 'active')
+    });
+
+    $('#calendar').datepicker({});
+
+</script>
+
+</body>
+</html>

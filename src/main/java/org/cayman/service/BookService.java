@@ -35,15 +35,15 @@ public class BookService {
         this.restTemplate = restTemplate;
     }
 
-    public List<BookDto> getAllBooksDto(){
+    public List<BookDto> getAllBooksDto() {
         String url = constants.getBookServiceUrl() + "/book";
         Book[] bookArray = restTemplate.getForObject(url, Book[].class);
         return convertBookToBookDTO(constants.getFileServiceUrl(), bookArray);
     }
 
-    public List<Book> getAllBooks(){
-        String url = constants.getBookServiceUrl() + "/book";
-        return Arrays.asList(restTemplate.getForObject(url, Book[].class));
+    public int getBooksCount() {
+        String url = constants.getBookServiceUrl() + "/book/count";
+        return restTemplate.getForObject(url, Integer.class);
     }
 
     public Book saveBook(String name, String lang, int year, String authors, String publisher,

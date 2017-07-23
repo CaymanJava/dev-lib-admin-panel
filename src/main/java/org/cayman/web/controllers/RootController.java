@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/")
 public class RootController {
     @RequestMapping(method = RequestMethod.GET)
-    public String root(){
-        return "redirect:books";
+    public String root(Model model) {
+        return "redirect:/dashboard";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

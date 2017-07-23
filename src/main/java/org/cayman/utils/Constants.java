@@ -13,4 +13,7 @@ public class Constants {
 
     @Value("${file.service.url}")
     private String fileServiceUrl;
+
+    @Value("${mail.service.url}")
+    private String mailServiceUrl;
 }

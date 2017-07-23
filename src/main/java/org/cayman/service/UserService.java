@@ -26,6 +26,10 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
+    public long getUserCount() {
+        return userRepository.count();
+    }
+
     public void update(User user) {
         userRepository.save(user);
     }
