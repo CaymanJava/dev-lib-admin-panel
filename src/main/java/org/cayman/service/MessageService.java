@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -29,7 +30,9 @@ public class MessageService {
 
     public List<Message> getAllMessages() {
         String url = constants.getMailServiceUrl() + "/message";
-        return Arrays.asList(restTemplate.getForObject(url, Message[].class));
+        List<Message> messages = Arrays.asList(restTemplate.getForObject(url, Message[].class));
+        Collections.sort(messages);
+        return messages;
     }
 
     public void changeStatus(int id) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("dashboard")
@@ -33,5 +34,17 @@ public class DashboardController {
         model.addAttribute("userCount", userService.getUserCount());
         model.addAttribute("messageList", messageService.getAllMessages());
         return "dashboard";
+    }
+
+    @RequestMapping(value = "mark", method = RequestMethod.GET)
+    public String markMessage(@RequestParam("id") int id) {
+        messageService.changeStatus(id);
+        return "redirect:/dashboard";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String deleteMessage(@RequestParam("id") int id) {
+        messageService.deleteMessage(id);
+        return "redirect:/dashboard";
     }
 }

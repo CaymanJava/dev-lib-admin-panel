@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Message {
+public class Message implements Comparable<Message>{
 
     private int id;
     private int userId;
@@ -25,4 +25,10 @@ public class Message {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime sendDateTime;
     private boolean newOne;
+
+    @Override
+    public int compareTo(Message o) {
+        return this.sendDateTime.isAfter(o.getSendDateTime())
+                ? -1 : this.sendDateTime.isBefore(o.getSendDateTime()) ? 1 : 0;
+    }
 }

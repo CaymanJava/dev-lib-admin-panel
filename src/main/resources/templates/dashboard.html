@@ -187,8 +187,8 @@
                                     <p th:text="${message.message}">
                                     </p>
                                     <p align="right">
-                                        <button class="btn btn-md" id="btn-chat">Mark</button>
-                                        <button class="btn btn-md" id="btn-chat">Delete</button>
+                                        <a th:href="@{dashboard/mark(id=${message.id})}" class="btn btn-md" id="btn-chat">Mark</a>
+                                        <a th:href="@{dashboard/delete(id=${message.id})}" class="btn btn-md" id="btn-chat">Delete</a>
                                     </p>
                                 </div>
                             </div>

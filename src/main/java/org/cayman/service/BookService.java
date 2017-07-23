@@ -159,7 +159,11 @@ public class BookService {
     }
 
     public static List<String> prepareAuthors(String authors) {
-        return Arrays.stream(authors.split(",")).map(String::trim).collect(Collectors.toList());
+        return Arrays
+                .stream(authors.split(","))
+                .filter(a -> !a.isEmpty())
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     private static List<String> prepareAuthors(List<Author> authors) {
